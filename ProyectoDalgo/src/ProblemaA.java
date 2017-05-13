@@ -22,72 +22,79 @@ public class ProblemaA {
 	public static void main(String[] args) {
 
 		MyScanner sc = new MyScanner();
-	      out = new PrintWriter(new BufferedOutputStream(System.out));
-	      
-	      // Comienzo solucion -------------------------------------------------------
-	   
-	      /*
-	      int n      = sc.nextInt();        // read input as integer
-	      long k     = sc.nextLong();       // read input as long
-	      double d   = sc.nextDouble();     // read input as double
-	      String str = sc.next();           // read input as String
-	      String s   = sc.nextLine();       // read whole line as String
+		out = new PrintWriter(new BufferedOutputStream(System.out));
 
-	      out.println(result);                    // print via PrintWriter
-	      */
+		// Comienzo solucion -------------------------------------------------------
 
-	      // Fin solución ------------------------------------------------------------
-	      out.close();
-	   }
+		Integer n = sc.nextInt();
 
-	     
+		while(n!=null)
+		{
+			int[] a = new int[n];
+			for (int i=0;i<n;i++){
+				a[i]=i+1;
+			}
+			int nr = sc.nextInt();
+			for (int i=0;i<nr;i++){
+				int p = sc.nextInt();
+				int q = sc.nextInt();
+				int k = sc.nextInt();
+			}
+		}
 
-	   //-----------PrintWriter para output más rápido---------------------------------
-	   public static PrintWriter out;
-	      
-	   //-----------MyScanner class para input más rápido------------------------------
-	   public static class MyScanner {
-	      BufferedReader br;
-	      StringTokenizer st;
-	 
-	      public MyScanner() {
-	         br = new BufferedReader(new InputStreamReader(System.in));
-	      }
-	 
-	      String next() {
-	          while (st == null || !st.hasMoreElements()) {
-	              try {
-	                  st = new StringTokenizer(br.readLine());
-	              } catch (IOException e) {
-	                  e.printStackTrace();
-	              }
-	          }
-	          return st.nextToken();
-	      }
-	 
-	      int nextInt() {
-	          return Integer.parseInt(next());
-	      }
-	 
-	      long nextLong() {
-	          return Long.parseLong(next());
-	      }
-	 
-	      double nextDouble() {
-	          return Double.parseDouble(next());
-	      }
-	 
-	      String nextLine(){
-	          String str = "";
-		  try {
-		     str = br.readLine();
-		  } catch (IOException e) {
-		     e.printStackTrace();
-		  }
-		  return str;
-	      }
+		out.println();
+		// Fin solución ------------------------------------------------------------
+		out.close();
+	}
 
-	   }
-	   //--------------------------------------------------------
+
+
+	//-----------PrintWriter para output más rápido---------------------------------
+	public static PrintWriter out;
+
+	//-----------MyScanner class para input más rápido------------------------------
+	public static class MyScanner {
+		BufferedReader br;
+		StringTokenizer st;
+
+		public MyScanner() {
+			br = new BufferedReader(new InputStreamReader(System.in));
+		}
+
+		String next() {
+			while (st == null || !st.hasMoreElements()) {
+				try {
+					st = new StringTokenizer(br.readLine());
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+			return st.nextToken();
+		}
+
+		int nextInt() {
+			return Integer.parseInt(next());
+		}
+
+		long nextLong() {
+			return Long.parseLong(next());
+		}
+
+		double nextDouble() {
+			return Double.parseDouble(next());
+		}
+
+		String nextLine(){
+			String str = "";
+			try {
+				str = br.readLine();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			return str;
+		}
+
+	}
+	//--------------------------------------------------------
 
 }
