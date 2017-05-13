@@ -25,15 +25,15 @@ public class ProblemaB {
 	      
 	      // Comienzo solucion -------------------------------------------------------
 	   
-	      /*
-	      int n      = sc.nextInt();        // read input as integer
-	      long k     = sc.nextLong();       // read input as long
-	      double d   = sc.nextDouble();     // read input as double
-	      String str = sc.next();           // read input as String
-	      String s   = sc.nextLine();       // read whole line as String
+	      int n = sc.nextInt();
+	      int[] a = new int[n];
+	      
+	      for (int i=0; i<n; i++){
+	    	  a[i]=sc.nextInt();
+	      }
 
-	      out.println(result);                    // print via PrintWriter
-	      */
+
+	      out.println();
 
 	      // Fin solución ------------------------------------------------------------
 	      out.close();
