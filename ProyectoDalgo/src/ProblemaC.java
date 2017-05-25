@@ -25,21 +25,58 @@ public class ProblemaC {
 	      out = new PrintWriter(new BufferedOutputStream(System.out));
 	      
 	      // Comienzo solucion -------------------------------------------------------
-	   
-	      /*
-	      int n      = sc.nextInt();        // read input as integer
-	      long k     = sc.nextLong();       // read input as long
-	      double d   = sc.nextDouble();     // read input as double
-	      String str = sc.next();           // read input as String
-	      String s   = sc.nextLine();       // read whole line as String
-
-	      out.println(result);                    // print via PrintWriter
-	      */
+	      String s   = sc.nextLine();
+	      String[] input = s.split(" = ");
+	      String iz = input[0];
+	      String[] izq = procesarInput(iz);
+	      String de = input [1];
+	      String[] der = procesarInput(de);
+	     
+	     der.clone();
 
 	      // Fin solución ------------------------------------------------------------
 	      out.close();
 	   }
+	
+	private static String[] procesarInput(String input){
+		String[] resp;
+		if (input.contains("+")) resp=input.split("[\\s+]+");
+		else if (input.contains("-")) resp=input.split("[\\s-]+");
+		else{
+			resp = new String[1];
+			resp[0] = input;
+		}
+		return resp;
+	}
 
+	
+	public static void printCombinations(String str){
+	    printCombinations(str, 0, str.length()-1);
+	}
+
+	public static void printCombinations(String str,int k,int n){
+	    if(k == n)
+	        System.out.println(str);
+	    else {
+	        for(int i=k;i<=n;i++){
+	            String tmp=modifyString(str,i,k);
+	            printCombinations(tmp,k+1,n);
+	            modifyString(str,i,k);
+	        }
+	    }
+	}
+
+	public static String modifyString(String str,int x,int y){
+
+	            // for swapping characters inside a string 
+	    char arr[]=str.toCharArray();
+	    char t= arr[x];
+	    arr[x]=arr[y];
+	    arr[y]=t;
+
+	    String s= new String(arr);
+	    return s;   
+	}
 	     
 
 	   //-----------PrintWriter para output más rápido---------------------------------

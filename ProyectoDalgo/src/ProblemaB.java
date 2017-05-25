@@ -26,10 +26,10 @@ public class ProblemaB {
 	      // Comienzo solucion -------------------------------------------------------
 	   
 	      int n = sc.nextInt();
-	      int[] a = new int[n];
+	      int[] p = new int[n];
 	      
 	      for (int i=0; i<n; i++){
-	    	  a[i]=sc.nextInt();
+	    	  p[i]=sc.nextInt();
 	      }
 
 
@@ -39,6 +39,22 @@ public class ProblemaB {
 	      out.close();
 	   }
 
+	/**
+	 * Predicado verdadero si se puede construir el entero a con las sumas de p1 y pj
+	 * @param a entero estudiado
+	 * @param j indice de p hasta el cual se sumará
+	 * @param p arreglo de participaciones
+	 * @return true si es construible, false de lo contrario
+	 */
+	private static boolean construible (int a, int j, int[] p){
+		int i=0,suma=0;
+		while(i<j){
+			suma+=p[i];
+			if (suma>=a) return true;
+			i++;
+		}
+		return false;
+	}
 	     
 
 	   //-----------PrintWriter para output más rápido---------------------------------
