@@ -56,6 +56,7 @@ public class ProblemaA {
 						rot = p+((i+k-1)%(q-p));
 						temp[rot]= a[i];
 					}
+					//holaa
 				}
 			}
 			a = temp.clone();
