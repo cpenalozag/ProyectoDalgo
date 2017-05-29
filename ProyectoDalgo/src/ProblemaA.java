@@ -20,29 +20,54 @@ public class ProblemaA {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-
 		MyScanner sc = new MyScanner();
 		out = new PrintWriter(new BufferedOutputStream(System.out));
-
 		// Comienzo solucion -------------------------------------------------------
-
+		System.out.println("Dimension del arreglo");
 		Integer n = sc.nextInt();
+		int a[] = new int[n];
+		String arr = "";
+		for(int i = 0; i<n ;i++){
+			a[i] = i+1;
+			arr += a[i]+" ";
+		}
+		System.out.println("Arreglo");
+		System.out.println(arr);
+		System.out.println("número de rotaciones");
+		int nr = sc.nextInt();
+		System.out.println("rotaciones");
+		String arrResp = "";
+		int temp[] = a.clone();
+		int rot = 0;
+		while(nr != 0){
+			int p = sc.nextInt();
+			int q = sc.nextInt();
+			int k = sc.nextInt();
 
-		while(n!=null)
-		{
-			int[] a = new int[n];
-			for (int i=0;i<n;i++){
-				a[i]=i+1;
+			for(int i = p ; i<q; i++){
+				if(p==0){
+					rot = (i+k) %(q-p);
+					temp[rot] = a[i];
+				}else if(p !=0){
+					if(k<0){
+						rot = p+((i-k) % (q-p));
+						temp[rot]= a[i];
+					}else{
+						rot = p+((i+k-1)%(q-p));
+						temp[rot]= a[i];
+					}
+					//holaa
+				}
 			}
-			int nr = sc.nextInt();
-			for (int i=0;i<nr;i++){
-				int p = sc.nextInt();
-				int q = sc.nextInt();
-				int k = sc.nextInt();
-			}
+			a = temp.clone();
+			
+			nr=nr-1;
+		}
+		for(int i = 0; i<n;i++){
+			arrResp+= a[i]+" ";
 		}
 
-		out.println();
+		System.out.println(arrResp);
 		// Fin solución ------------------------------------------------------------
 		out.close();
 	}
