@@ -1,11 +1,14 @@
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
+import java.io.DataInputStream;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.io.Reader;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Scanner;
 import java.util.StringTokenizer;
 
 
@@ -28,34 +31,36 @@ public class Main {
 
 	/**
 	 * @param args
+	 * @throws IOException 
 	 */
-	public static void main(String[] args) {
-
-		MyScanner sc = new MyScanner();
-		out = new PrintWriter(new BufferedOutputStream(System.out));
+	public static void main(String[] args) throws IOException {
+		Reader r = new Reader();
 
 
 		// Comienzo solucion -------------------------------------------------------
-		
-		String s   = sc.nextLine();
-		String[] input = s.split("[\\=]");
-		String iz = input[0];
+		String s;
+		while((s=r.readLine())!=null){
+			s=s.substring(0,s.length()-1);
+			String[] input = s.split("[\\=]");
+			String iz = input[0];
 
-		String[] izq = procesarInput(iz,IZQUIERDA);
+			String[] izq = procesarInput(iz,IZQUIERDA);
 
-		String de = input [1];
-		String[] der = procesarInput(de.substring(1, de.length()),DERECHA);
+			String de = input [1];
+			String[] der = procesarInput(de.substring(1, de.length()),DERECHA);
 
-		String[] elems = new String[2];
-		elems[0]=izq[0]+der[0];
-		elems[1]=izq[1]+der[1];
+			String[] elems = new String[2];
+			elems[0]=izq[0]+der[0];
+			elems[1]=izq[1]+der[1];
 
-		letras=letrasUnicas(izq, der);
-		firmas=calcularFirmas(letras, elems);
-		primeros=primerosCaracteres(izq, der);
+			letras=letrasUnicas(izq, der);
+			firmas=calcularFirmas(letras, elems);
+			primeros=primerosCaracteres(izq, der);
 
-		solucionar();
-		if(!resuelto) out.println("**********");
+			solucionar();
+			if(!resuelto) System.out.println("**********");
+			resuelto=false;
+		}
 
 		// Fin solución ------------------------------------------------------------
 		out.close();
@@ -204,8 +209,7 @@ public class Main {
 		if (k == arr.size() -1){
 			if (esRespuesta(arr)){
 				resuelto=true;
-				out.println(respuesta(arr));
-				return;
+				System.out.println(respuesta(arr));
 			}
 		}
 	}
@@ -216,9 +220,6 @@ public class Main {
 	}
 
 	private static boolean esRespuesta(java.util.List<Integer> digitos){
-		int[] firm = firmas;
-		String prim = primeros;
-		String let = letras;
 		int resp = 0;
 		for (int i=0;i<10;i++){
 			resp+=digitos.get(i)*firmas[i];
@@ -298,5 +299,126 @@ public class Main {
 
 	}
 	//--------------------------------------------------------
+
+	static class Reader
+	{
+		final private int BUFFER_SIZE = 1 << 16;
+		private DataInputStream din;
+		private byte[] buffer;
+		private int bufferPointer, bytesRead;
+
+		public Reader()
+		{
+			din = new DataInputStream(System.in);
+			buffer = new byte[BUFFER_SIZE];
+			bufferPointer = bytesRead = 0;
+		}
+
+		public Reader(String file_name) throws IOException
+		{
+			din = new DataInputStream(new FileInputStream(file_name));
+			buffer = new byte[BUFFER_SIZE];
+			bufferPointer = bytesRead = 0;
+		}
+
+		public String readLine() throws IOException
+		{
+			byte[] buf = new byte[64]; // line length
+			int cnt = 0, c;
+			while ((c = read()) != -1)
+			{
+				if (c == '\n')
+					break;
+				buf[cnt++] = (byte) c;
+			}
+			return new String(buf, 0, cnt);
+		}
+
+		public int nextInt() throws IOException
+		{
+			int ret = 0;
+			byte c = read();
+			while (c <= ' ')
+				c = read();
+			boolean neg = (c == '-');
+			if (neg)
+				c = read();
+			do
+			{
+				ret = ret * 10 + c - '0';
+			}  while ((c = read()) >= '0' && c <= '9');
+
+			if (neg)
+				return -ret;
+			return ret;
+		}
+
+		public long nextLong() throws IOException
+		{
+			long ret = 0;
+			byte c = read();
+			while (c <= ' ')
+				c = read();
+			boolean neg = (c == '-');
+			if (neg)
+				c = read();
+			do {
+				ret = ret * 10 + c - '0';
+			}
+			while ((c = read()) >= '0' && c <= '9');
+			if (neg)
+				return -ret;
+			return ret;
+		}
+
+		public double nextDouble() throws IOException
+		{
+			double ret = 0, div = 1;
+			byte c = read();
+			while (c <= ' ')
+				c = read();
+			boolean neg = (c == '-');
+			if (neg)
+				c = read();
+
+			do {
+				ret = ret * 10 + c - '0';
+			}
+			while ((c = read()) >= '0' && c <= '9');
+
+			if (c == '.')
+			{
+				while ((c = read()) >= '0' && c <= '9')
+				{
+					ret += (c - '0') / (div *= 10);
+				}
+			}
+
+			if (neg)
+				return -ret;
+			return ret;
+		}
+
+		private void fillBuffer() throws IOException
+		{
+			bytesRead = din.read(buffer, bufferPointer = 0, BUFFER_SIZE);
+			if (bytesRead == -1)
+				buffer[0] = -1;
+		}
+
+		private byte read() throws IOException
+		{
+			if (bufferPointer == bytesRead)
+				fillBuffer();
+			return buffer[bufferPointer++];
+		}
+
+		public void close() throws IOException
+		{
+			if (din == null)
+				return;
+			din.close();
+		}
+	}
 
 }
