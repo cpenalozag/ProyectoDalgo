@@ -7,8 +7,8 @@ import java.util.StringTokenizer;
 
 
 /**
- * @author c.penaloza
- * @author jd.gonzaleza
+ * @author c.penaloza Carlos Peñaloza 201531973
+ * @author jd.gonzaleza Juan Diego González 201531418
  */
 
 /**
