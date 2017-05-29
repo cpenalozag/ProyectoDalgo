@@ -20,7 +20,7 @@ public class ProblemaB {
 	 * @param args
 	 */
 	private static boolean resp[];
-	private static double p[] ;
+	private static int[] p;
 	private static double respuesta;
 	private static int n;
 	public static void main(String[] args) throws IOException {
@@ -29,18 +29,21 @@ public class ProblemaB {
 		out = new PrintWriter(new BufferedOutputStream(System.out));
 
 		// Comienzo solucion -------------------------------------------------------
+		resp = new boolean[0];
+		 p = new int[0] ;
 		String s;
+
 		LinkedList<String> resultados = new LinkedList<>();
 		while(!(s = sc.nextLine()).equals("")){
 			String[] x = s.split(" ");
 			
 			if(x.length ==1){
 				 n= Integer.parseInt(x[0]);
-				 p = new double[n];
+				 p = new int[n];
 			}
 			else{
 				for (int i=0; i<x.length; i++){
-					p[i]=Double.parseDouble(x[i]);
+					p[i]=Integer.parseInt(x[i]);
 				}
 				resp = new boolean[101];
 				for(int k=0; k<=n-1; k++){
@@ -49,9 +52,10 @@ public class ProblemaB {
 					}
 				}
 
-				for(int i = 51; i<=100; i++){
+				for(int i = 51; i<100; i++){
 					if(resp[i] == true){
 						respuesta = 100*(p[n-1]/(double)i);
+						System.out.println(p[n-1]+ "/" + i);
 						break;
 					}
 
@@ -68,28 +72,11 @@ public class ProblemaB {
 	}
 
 
-	/**
-	 * Predicado verdadero si se puede construir el entero a con las sumas de p1 y pj
-	 * @param a entero estudiado
-	 * @param j indice de p hasta el cual se sumará
-	 * @param p arreglo de participaciones
-	 * @return true si es construible, false de lo contrario
-	 */
-	private static void construible (int a, int j, int[]pParam, boolean[] nec){
-		if(j==0){
-			nec[a]= (a == pParam[pParam.length-1]);
-		}else if(pParam[(j+pParam.length-1)%pParam.length]>a){
-			nec[a] = nec[a];
-		}else if(pParam[(j+pParam.length-1)%pParam.length]<=a){
-			nec[a] = nec[a] || nec[a - pParam[(j+pParam.length-1)%pParam.length]];
-		}
-
-	}
 	private static void construible (int a, int j){
 		if(j==0){
 			resp[a]= (a==p[p.length-1]);
 		}else if(p[(j+p.length-1)%p.length]<=a){
-			resp[a]= resp[a]|| resp[(int) (a-p[(j+p.length-1)%p.length])];
+			resp[a]= resp[a]|| resp[(a-p[(j+p.length-1)%p.length])];
 		}
 	}
 
