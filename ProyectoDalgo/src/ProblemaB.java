@@ -20,7 +20,7 @@ public class ProblemaB {
 	 * @param args
 	 */
 	private static boolean resp[];
-	private static int p[] ;
+	private static double p[] ;
 	private static double respuesta;
 	private static int n;
 	public static void main(String[] args) throws IOException {
@@ -36,11 +36,11 @@ public class ProblemaB {
 			
 			if(x.length ==1){
 				 n= Integer.parseInt(x[0]);
-				 p = new int[n];
+				 p = new double[n];
 			}
 			else{
 				for (int i=0; i<x.length; i++){
-					p[i]=Integer.parseInt(x[i]);
+					p[i]=Double.parseDouble(x[i]);
 				}
 				resp = new boolean[101];
 				for(int k=0; k<=n-1; k++){
@@ -89,7 +89,7 @@ public class ProblemaB {
 		if(j==0){
 			resp[a]= (a==p[p.length-1]);
 		}else if(p[(j+p.length-1)%p.length]<=a){
-			resp[a]= resp[a]|| resp[a-p[(j+p.length-1)%p.length]];
+			resp[a]= resp[a]|| resp[(int) (a-p[(j+p.length-1)%p.length])];
 		}
 	}
 
