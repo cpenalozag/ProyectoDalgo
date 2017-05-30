@@ -6,11 +6,9 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.util.LinkedList;
 import java.util.StringTokenizer;
-
-
 /**
- * @author c.penaloza
- * @author jd.gonzaleza
+ * @author c.penaloza Carlos Peñaloza 201531973
+ * @author jd.gonzaleza Juan Diego González	201531418
  */
 
 /**
@@ -69,7 +67,6 @@ private static int[] a  ;
 					arrResp+= a[i]+" ";
 				}
 				respuesta.add(arrResp);
-//				System.out.println(arrResp);
 			
 		}
 		for(String r: respuesta){
@@ -97,7 +94,6 @@ private static int[] a  ;
 	}
 	//-----------PrintWriter para output más rápido---------------------------------
 	public static PrintWriter out;
-
 	//-----------MyScanner class para input más rápido------------------------------
 	public static class MyScanner {
 		BufferedReader br;

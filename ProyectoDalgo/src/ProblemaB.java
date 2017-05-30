@@ -52,10 +52,9 @@ public class ProblemaB {
 					}
 				}
 
-				for(int i = 51; i<100; i++){
+				for(int i = 51; i<=100; i++){
 					if(resp[i] == true){
 						respuesta = 100*(p[n-1]/(double)i);
-						System.out.println(p[n-1]+ "/" + i);
 						break;
 					}
 
