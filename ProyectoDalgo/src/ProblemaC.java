@@ -13,7 +13,7 @@ import java.util.List;
 /**
  * Problema C
  */
-public class Main {
+public class ProblemaC {
 
 	final static String DERECHA = "der";
 	final static String IZQUIERDA = "izq";
@@ -65,12 +65,14 @@ public class Main {
 			str.trim();
 			for (char c: str.toCharArray()){
 				if (!letras.contains(c+"")&&c!=','&&c!=' ')letras+=c+"";
+				if (letras.length()==10) break;
 			}
 		}
 		for (String str: der){
 			str.trim();
 			for (char c: str.toCharArray()){
 				if (!letras.contains(c+"")&&c!=','&&c!=' ')letras+=c+"";
+				if (letras.length()==10) break;
 			}
 		}
 		return letras;
