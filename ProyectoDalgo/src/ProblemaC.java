@@ -6,8 +6,8 @@ import java.util.List;
 
 
 /**
- * @author c.penaloza
- * @author jd.gonzaleza
+ * @author c.penaloza Carlos Peñaloza 201531973
+ * @author jd.gonzaleza Juan Diego González	201531418
  */
 
 /**
@@ -24,14 +24,15 @@ public class ProblemaC {
 	static boolean prim = false;
 	/**
 	 * @param args
-	 * @throws IOException 
+	 * @throws IOException
 	 */
 	public static void main(String[] args) {
+
 		try{
 			BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 			String str = null;
 			while((str=br.readLine())!=null){
-				//if (!prim)System.out.println();prim=true;
+				long t = System.currentTimeMillis();
 				String[] input = str.split("[\\=]");
 				String iz = input[0];
 
@@ -49,13 +50,15 @@ public class ProblemaC {
 				primeros=primerosCaracteres(izq, der);
 
 				solucionar();
+
 				if(!resuelto) System.out.println("**********");
 				resuelto=false;
 			}
 		}
 		catch (Exception e){
-			
+
 		}
+
 	}
 
 
@@ -121,7 +124,7 @@ public class ProblemaC {
 					k++;
 					n=iMe+1;
 				}
-			}	
+			}
 
 			if (finMenos){
 				while (k<partes.length-1){
