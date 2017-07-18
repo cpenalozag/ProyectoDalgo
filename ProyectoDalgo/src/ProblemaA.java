@@ -1,14 +1,14 @@
+
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.util.LinkedList;
 import java.util.StringTokenizer;
-
-
 /**
- * @author c.penaloza
- * @author jd.gonzaleza
+ * @author c.penaloza Carlos Peñaloza 201531973
+ * @author jd.gonzaleza Juan Diego González	201531418
  */
 
 /**
@@ -19,64 +19,81 @@ public class ProblemaA {
 	/**
 	 * @param args
 	 */
+private static int[] a  ;
 	public static void main(String[] args) {
 		MyScanner sc = new MyScanner();
 		out = new PrintWriter(new BufferedOutputStream(System.out));
+		
+		
 		// Comienzo solucion -------------------------------------------------------
-		System.out.println("Dimension del arreglo");
-		Integer n = sc.nextInt();
-		int a[] = new int[n];
-		String arr = "";
-		for(int i = 0; i<n ;i++){
-			a[i] = i+1;
-			arr += a[i]+" ";
-		}
-		System.out.println("Arreglo");
-		System.out.println(arr);
-		System.out.println("número de rotaciones");
-		int nr = sc.nextInt();
-		System.out.println("rotaciones");
-		String arrResp = "";
-		int temp[] = a.clone();
-		int rot = 0;
-		while(nr != 0){
-			int p = sc.nextInt();
-			int q = sc.nextInt();
-			int k = sc.nextInt();
 
-			for(int i = p ; i<q; i++){
-				if(p==0){
-					rot = (i+k) %(q-p);
-					temp[rot] = a[i];
-				}else if(p !=0){
-					if(k<0){
-						rot = p+((i-k) % (q-p));
-						temp[rot]= a[i];
-					}else{
-						rot = p+((i+k-1)%(q-p));
-						temp[rot]= a[i];
-					}
-					//holaa
-				}
+		String s;
+		LinkedList<String> respuesta = new LinkedList<>();
+		
+		while(!(s= sc.nextLine()).equals("")){
+			int n = Integer.parseInt(s);
+			a = new int[n];
+			for(int i = 0;i<n; i++){
+				
+				a[i]= i+1;
 			}
-			a = temp.clone();
-			
-			nr=nr-1;
-		}
-		for(int i = 0; i<n;i++){
-			arrResp+= a[i]+" ";
-		}
 
-		System.out.println(arrResp);
+				int nr = Integer.parseInt(sc.nextLine());
+				String arrResp = "";
+
+				while(nr != 0){
+					String[] x = sc.nextLine().split(" ");
+					int p = Integer.parseInt(x[0]);
+					int q = Integer.parseInt(x[1]);
+					int k = Integer.parseInt(x[2]);
+
+					if(k>0 ){
+						if(p<q){
+							reverso(a, p, (q-1)-(k%(q-p)));
+							reverso(a, q-(k%(q-p)), q-1);
+							reverso(a, p, q-1); 
+						}
+					}
+					else{
+						if(p<q){
+							reverso(a, p, p+(Math.abs(k)%(q-p)-1));
+							reverso(a, p+(Math.abs(k)%(q-p)), q-1);
+							reverso(a, p, q-1);
+						}
+					}
+					nr=nr-1;
+				}
+				for(int i = 0; i<n;i++){
+					arrResp+= a[i]+" ";
+				}
+				respuesta.add(arrResp);
+			
+		}
+		for(String r: respuesta){
+			out.println(r);
+		}
 		// Fin solución ------------------------------------------------------------
 		out.close();
 	}
 
 
+	// método ayudante//
 
+	static void reverso(int arr[], int in, int fin){
+		int aux;
+		while(in < fin){
+			aux = arr[in];
+			arr[in] = arr[fin];
+			arr[fin] = aux;
+			in++;
+			fin--;
+		}
+
+
+
+	}
 	//-----------PrintWriter para output más rápido---------------------------------
 	public static PrintWriter out;
-
 	//-----------MyScanner class para input más rápido------------------------------
 	public static class MyScanner {
 		BufferedReader br;
